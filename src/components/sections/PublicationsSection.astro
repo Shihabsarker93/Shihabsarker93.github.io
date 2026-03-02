@@ -1,0 +1,172 @@
+---
+const pubFiles = await Astro.glob('../../content/publications/*.md');
+
+const publications = pubFiles
+  .map((f) => ({ ...f.frontmatter }))
+  .sort((a, b) => (b.year || 0) - (a.year || 0));
+
+const byYear = publications.reduce((acc, pub) => {
+  acc[pub.year] = acc[pub.year] || [];
+  acc[pub.year].push(pub);
+  return acc;
+}, {});
+
+const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<div class="page-header animate">
+  <span class="page-label">Research</span>
+  <h1>Publications</h1>
+  <p>Template placeholders are shown for now. Real publication details will be added later.</p>
+</div>
+
+{years.map((year, yi) => (
+  <section class={`year-group animate delay-${Math.min(yi + 1, 4)}`}>
+    <div class="year-header">
+      <span class="year-num">{year}</span>
+    </div>
+
+    <div class="pub-list">
+      {byYear[year].map((pub) => (
+        <article class="pub-card">
+          <div class="pub-main">
+            <h3 class="pub-title">{pub.title}</h3>
+            {pub.authors && <p class="pub-authors">{pub.authors}</p>}
+            {pub.venue && (
+              <p class="pub-venue">
+                <em>{pub.venue}</em>
+                {pub.year && `, ${pub.year}`}
+              </p>
+            )}
+            {pub.description && <p class="pub-desc">{pub.description}</p>}
+            {pub.tags && (
+              <div class="tags">
+                {pub.tags.map((tag) => <span class="tag">{tag}</span>)}
+              </div>
+            )}
+          </div>
+
+          <div class="pub-links">
+            {pub.pdf && (
+              <a href={pub.pdf} class="btn btn-primary" target="_blank" rel="noopener">PDF ↓</a>
+            )}
+            {pub.doi && (
+              <a href={`https://doi.org/${pub.doi}`} class="btn btn-outline" target="_blank" rel="noopener">DOI</a>
+            )}
+            {pub.arxiv && (
+              <a href={pub.arxiv} class="btn btn-outline" target="_blank" rel="noopener">arXiv</a>
+            )}
+            {pub.code && (
+              <a href={pub.code} class="btn btn-outline" target="_blank" rel="noopener">Code</a>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+))}
+
+{publications.length === 0 && (
+  <p class="empty">No publications yet. Placeholder section for future updates.</p>
+)}
+
+<style>
+.year-group {
+  margin-bottom: 3rem;
+}
+
+.year-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.year-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+}
+
+.pub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pub-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.pub-card:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.pub-main {
+  flex: 1;
+}
+
+.pub-title {
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+  line-height: 1.4;
+}
+
+.pub-authors {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.pub-venue {
+  font-size: 0.82rem;
+  color: var(--text-subtle);
+  margin-bottom: 0.5rem;
+}
+
+.pub-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  max-width: 55ch;
+}
+
+.pub-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  align-items: flex-end;
+}
+
+.empty {
+  color: var(--text-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 2rem 0;
+}
+
+@media (max-width: 720px) {
+  .pub-card {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .pub-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+}
+</style>

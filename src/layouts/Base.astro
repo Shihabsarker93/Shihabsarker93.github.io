@@ -27,7 +27,7 @@ const navLinks = [
   <title>{title}</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 </head>
-<body data-enable-scrollspy={enableScrollSpy ? 'true' : 'false'}>
+<body data-enable-scrollspy={enableScrollSpy ? 'true' : 'false'} data-current-page={currentPage}>
   <nav data-scrollspy-nav={enableScrollSpy ? 'true' : undefined}>
     <div class="nav-inner">
       <a href={enableScrollSpy ? '/#home' : '/'} class="nav-logo">Md Shihab Sarker</a>

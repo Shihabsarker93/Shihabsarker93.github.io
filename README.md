@@ -1,54 +1,132 @@
+Perfect. Below is your **fully edited, production-ready README** with:
+
+* Clear architecture explanation
+* Golden workflow
+* Navigation clarification
+* Route casing warning
+* Codex guardrail template
+* Clean structure
+* No redundancy
+* No architectural changes
+
+You can replace your entire README with this.
+
+---
+
 # My Portfolio
 
 A clean, minimal academic/developer portfolio built with **Astro**, hosted on **GitHub Pages**, with content managed as **Markdown files**.
 
-The main experience is a **single long homepage** (`/`) with sections for Home, Projects, Publications, CV, Beyond Academics, and Contact. The top nav uses **scrollspy** to highlight the section currently in view.
+🔗 Live site:
+[https://shihabsarker93.github.io/](https://shihabsarker93.github.io/)
 
-## 🚀 Quick Start
+---
 
-## https://shihabsarker93.github.io/
+## 🧭 Site Architecture Overview
+
+The main experience is a **single long homepage** (`/`) with sections for:
+
+* Home
+* Projects
+* Publications
+* CV
+* Beyond Academics
+* Contact
+
+The top navigation uses **scrollspy** to highlight the section currently in view.
+
+The site also keeps **standalone routes**:
+
+* `/projects`
+* `/publications`
+* `/cv`
+* `/contact`
+* `/Beyond_Academics`
+* `/Beyond_Academics/trips`
+* `/beyond-academics/*`
+
+Homepage sections and standalone pages share the **same section components**, so editing content once updates everywhere.
+
+---
+
+# 🚀 Quick Start
 
 ```bash
 npm install
 npm run dev        # http://localhost:4321
 npm run build      # build to /dist
-npm run preview    # preview the build
+npm run preview    # preview the production build
 ```
 
 ---
 
-## 📁 Project Structure
+# ✅ Golden Workflow (Always Follow)
+
+1. Make changes (usually inside `src/components/sections/*` or `src/styles/global.css`)
+
+2. Verify locally:
+
+```bash
+npm run build
+```
+
+3. If build passes:
+
+```bash
+git add .
+git commit -m "Describe change"
+git push
+```
+
+If GitHub emails a build failure:
+
+* Go to **Repo → Actions**
+* Open the latest failed workflow
+* Fix the issue locally and push again
+
+---
+
+# 📁 Project Structure
 
 ```
 my-portfolio/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml        # Auto-deploy to GitHub Pages on push
+│       └── deploy.yml
 ├── src/
 │   ├── layouts/
-│   │   └── Base.astro        # Shared nav/footer layout
+│   │   └── Base.astro
+│   ├── components/
+│   │   └── sections/
+│   │       ├── ProjectsSection.astro
+│   │       ├── PublicationsSection.astro
+│   │       ├── CVSection.astro
+│   │       ├── ContactSection.astro
+│   │       └── BeyondAcademicsSection.astro
 │   ├── pages/
-│   │   ├── index.astro       # Single-page home with all major sections + scrollspy targets
-│   │   ├── projects.astro    # Standalone Projects route (kept for direct access)
-│   │   ├── publications.astro # Standalone Publications route (kept for direct access)
-│   │   ├── cv.astro          # Standalone CV route (kept for direct access)
-│   │   ├── Beyond_Academics.astro  # Standalone Beyond Academics route
+│   │   ├── index.astro
+│   │   ├── projects.astro
+│   │   ├── publications.astro
+│   │   ├── cv.astro
+│   │   ├── contact.astro
+│   │   ├── Beyond_Academics.astro
 │   │   ├── Beyond_Academics/
-│   │   │   └── trips.astro         # Trips photo page
-│   │   └── contact.astro     # Standalone Contact route
+│   │   │   └── trips.astro
+│   │   └── beyond-academics/
+│   │       ├── interests.astro
+│   │       ├── community.astro
+│   │       ├── photos.astro
+│   │       └── trips.astro
 │   ├── content/
-│   │   ├── projects/         # One .md file per project
-│   │   └── publications/     # One .md file per paper
-│   ├── env.d.ts              # Astro env types
+│   │   ├── projects/
+│   │   └── publications/
 │   └── styles/
-│       └── global.css        # All styles
+│       └── global.css
 ├── public/
-│   ├── docs/                 # PDFs (resume, papers, etc.)
-│   ├── tour/
-│   │   └── images1/          # Tour/trip photos
-│   ├── beyond/               # Life-event photos (non-tour)
-│   ├── miscellaneous/        # Miscellaneous photos
-│   ├── images/               # Legacy/general image folder (optional)
+│   ├── docs/
+│   ├── tour/images1/
+│   ├── beyond/
+│   ├── miscellaneous/
 │   └── favicon.svg
 ├── package.json
 ├── package-lock.json
@@ -57,109 +135,245 @@ my-portfolio/
 
 ---
 
-## ✏️ Customising Content
+# ✏️ Customising Content
 
-### 1. Personal info
-Edit these files:
-- `src/layouts/Base.astro` — nav/logo/footer and homepage scrollspy behavior
-- `src/pages/index.astro` — all homepage sections (Home, Projects, Publications, CV, Beyond Academics, Contact)
-- `src/pages/cv.astro` — your education, experience, skills, awards
-- `src/pages/Beyond_Academics.astro` — beyond academics overview
-- `src/pages/Beyond_Academics/trips.astro` — trips and tour photos
-- `src/pages/contact.astro` — your email and social links
+## 🔹 Single Source of Truth
 
-### 1.1 Homepage section IDs (used by nav + scrollspy)
-Keep these section IDs in `src/pages/index.astro`:
-- `home`
-- `projects`
-- `publications`
-- `cv`
-- `beyond-academics`
-- `contact`
+All main sections must be edited in:
 
-### 2. Adding a publication
-Create a new file in `src/content/publications/`:
-
-```md
----
-title: "Your Paper Title"
-authors: "Your Name, Co-Author"
-year: 2024
-venue: "Conference / Journal Name"
-description: "One paragraph describing the paper."
-pdf: "/docs/your-paper.pdf"
-arxiv: "https://arxiv.org/abs/XXXX.XXXXX"
-code: "https://github.com/you/repo"
-doi: "10.XXXX/XXXXX"
-tags: ["tag1", "tag2"]
----
+```
+src/components/sections/*
 ```
 
-Papers are auto-listed, sorted by year. Only include the frontmatter fields you have.
+These are rendered by both:
 
-### 3. Adding a project
-Create a new file in `src/content/projects/`:
+* Homepage scroll (`/`)
+* Standalone pages (`/projects`, `/contact`, etc.)
 
-```md
+Do NOT duplicate markup inside page files.
+
 ---
-title: "Project Name"
-description: "What it does and why it matters."
-year: 2024
-featured: true          # shows in the featured grid at top
-status: "active"        # active | archived | wip
-github: "https://github.com/you/repo"
-demo: "https://your-demo.com"
-tags: ["Python", "PyTorch"]
+
+## 🔹 Where To Edit (Cheat Sheet)
+
+Change section content globally:
+
+* `src/components/sections/*`
+
+Change navbar or scrollspy:
+
+* `src/layouts/Base.astro`
+
+Change styling:
+
+* `src/styles/global.css`
+
+Add a publication:
+
+* Create `.md` file in `src/content/publications/`
+
+Add a project:
+
+* Create `.md` file in `src/content/projects/`
+
+Add PDFs:
+
+* Place in `public/docs/`
+
+Add photos:
+
+* Trips → `public/tour/images1/`
+* Beyond → `public/beyond/`
+* Misc → `public/miscellaneous/`
+
 ---
+
+# 🧭 Navigation Model
+
+### Homepage (`/`)
+
+* Nav links use anchors:
+
+  * `/#home`
+  * `/#projects`
+  * `/#publications`
+  * `/#cv`
+  * `/#beyond-academics`
+  * `/#contact`
+* Scrollspy updates active nav underline via `IntersectionObserver`
+
+### Standalone Pages
+
+* Nav links use route paths:
+
+  * `/projects`
+  * `/publications`
+  * `/cv`
+  * `/contact`
+  * `/Beyond_Academics`
+* Active state is route-based
+
+This dual navigation model is intentional.
+
+---
+
+# 🔁 Beyond Subpage Back Behavior
+
+Subpages under:
+
+```
+/beyond-academics/*
 ```
 
-### 4. Adding PDFs
-Drop PDF files into `public/docs/` and reference them as `/docs/filename.pdf`.
+Must use back links to:
 
-### 5. Adding photos
-- Trips/tours: add files to `public/tour/images1/` and reference as `/tour/images1/filename.jpg`
-- Beyond academics events: add files to `public/beyond/` and reference as `/beyond/filename.jpg`
-- Misc photos: add files to `public/miscellaneous/` and reference as `/miscellaneous/filename.jpg`
+```
+/#beyond-academics
+```
 
----
+NOT `/Beyond_Academics`.
 
-## 🌐 Deploying to GitHub Pages
-
-1. Create a GitHub repo (e.g. `yourusername.github.io` or `portfolio`)
-2. Push this project to the repo's `main` branch
-3. In GitHub → Settings → Pages → set Source to **GitHub Actions**
-4. The workflow at `.github/workflows/deploy.yml` will auto-build and deploy on every push
-5. Update `site` in `astro.config.mjs` to match your URL:
-   - For user site: `https://yourusername.github.io`
-   - For project site: `https://yourusername.github.io/repo-name` (also set `base: '/repo-name/'`)
+This preserves homepage scroll context.
 
 ---
 
-## 🎨 Customising Design
+# 🔒 Core Architecture Rules (Do Not Break)
 
-All styles are in `src/styles/global.css`. CSS variables at the top control the entire colour scheme:
+### 1. Single Source of Truth
+
+* Edit only `src/components/sections/*`
+* Pages must render components, not duplicate section markup
+
+### 2. Dual Navigation Model Must Stay Intact
+
+* Homepage = anchor navigation + scrollspy
+* Standalone pages = route navigation
+
+### 3. Scrollspy Rules
+
+* Only active on homepage
+* Watches IDs:
+
+  * home
+  * projects
+  * publications
+  * cv
+  * beyond-academics
+  * contact
+* Observer config:
+
+  * `rootMargin: "-35% 0px -55% 0px"`
+  * `threshold: 0`
+
+### 4. Static Deployment Constraints
+
+* Must remain fully static
+* Contact form = `mailto:` only
+* No backend/server assumptions
+
+### 5. Route Compatibility Rules
+
+* These routes must remain valid:
+
+  * `/Beyond_Academics`
+  * `/Beyond_Academics/trips`
+* Lowercase routes (`/beyond-academics/*`) must not break uppercase routes
+
+⚠ GitHub Pages is case-sensitive.
+Do not rename or change route casing without updating all links.
+
+### 6. Style Contracts
+
+* Preserve anchor offset:
+
+  ```css
+  section[id] { scroll-margin-top: 90px; }
+  ```
+* Nav underline tied to `.active` / `.is-active`
+
+---
+
+# 🤖 Codex / AI Guardrail
+
+Before making changes:
+
+* Read this README
+* Strictly follow **Core Architecture Rules (Do Not Break)**
+
+Do NOT:
+
+* Duplicate section markup
+* Break shared components
+* Break dual navigation model
+* Remove scrollspy
+* Change route compatibility
+* Break static GitHub Pages behavior
+
+### Recommended Prompt Template
+
+```
+Read README.md and strictly follow “Core Architecture Rules (Do Not Break)”.
+Only implement the requested UI change.
+Do not modify routing, scrollspy, or section component structure.
+Run npm run build and ensure it passes.
+```
+
+---
+
+# 🎨 Customising Design
+
+All styles live in:
+
+```
+src/styles/global.css
+```
+
+Theme variables:
 
 ```css
 :root {
-  --bg: #f5f2ec;          /* page background */
-  --accent: #c84b2f;      /* links, tags, highlights */
-  --text: #1a1816;        /* body text */
-  ...
+  --bg: #f5f2ec;
+  --accent: #c84b2f;
+  --text: #1a1816;
 }
 ```
 
-Fonts are loaded from Google Fonts (Instrument Serif + DM Mono + Geist).
+Fonts:
+
+* Instrument Serif
+* DM Mono
+* Geist
 
 ---
 
-## 🛠 Tech Stack
+# 🛠 Tech Stack
 
-| Tool | Purpose |
-|------|---------|
-| [Astro](https://astro.build) | Static site generator |
-| GitHub Pages | Free hosting |
-| Markdown | Content authoring |
-| CSS (no framework) | Styling |
-| GitHub Actions | Auto-deploy CI/CD |
+| Tool           | Purpose               |
+| -------------- | --------------------- |
+| Astro          | Static site generator |
+| GitHub Pages   | Free hosting          |
+| Markdown       | Content management    |
+| CSS            | Styling               |
+| GitHub Actions | CI/CD                 |
 
-100% free. No database. No backend. No build complexity.
+100% free.
+No database.
+No backend.
+Fully static.
+
+---
+
+# 🧠 Final Architecture Summary
+
+This site intentionally supports:
+
+* A smooth, modern single-page scroll experience
+* Fully functional standalone pages
+* Shared content via reusable components
+* Scroll-driven navigation
+* Static GitHub deployment
+
+All section edits must happen in `src/components/sections/*` to stay consistent.
+
+
+
