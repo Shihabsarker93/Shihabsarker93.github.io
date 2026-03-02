@@ -2,6 +2,8 @@
 
 A clean, minimal academic/developer portfolio built with **Astro**, hosted on **GitHub Pages**, with content managed as **Markdown files**.
 
+The main experience is a **single long homepage** (`/`) with sections for Home, Projects, Publications, CV, Beyond Academics, and Contact. The top nav uses **scrollspy** to highlight the section currently in view.
+
 ## 🚀 Quick Start
 
 ## https://shihabsarker93.github.io/
@@ -26,14 +28,14 @@ my-portfolio/
 │   ├── layouts/
 │   │   └── Base.astro        # Shared nav/footer layout
 │   ├── pages/
-│   │   ├── index.astro       # Home page
-│   │   ├── projects.astro    # Projects (auto-loaded from content/)
-│   │   ├── publications.astro # Publications (auto-loaded from content/)
-│   │   ├── cv.astro          # CV page
-│   │   ├── Beyond_Academics.astro  # Beyond academics overview page
+│   │   ├── index.astro       # Single-page home with all major sections + scrollspy targets
+│   │   ├── projects.astro    # Standalone Projects route (kept for direct access)
+│   │   ├── publications.astro # Standalone Publications route (kept for direct access)
+│   │   ├── cv.astro          # Standalone CV route (kept for direct access)
+│   │   ├── Beyond_Academics.astro  # Standalone Beyond Academics route
 │   │   ├── Beyond_Academics/
 │   │   │   └── trips.astro         # Trips photo page
-│   │   └── contact.astro     # Contact page
+│   │   └── contact.astro     # Standalone Contact route
 │   ├── content/
 │   │   ├── projects/         # One .md file per project
 │   │   └── publications/     # One .md file per paper
@@ -59,12 +61,21 @@ my-portfolio/
 
 ### 1. Personal info
 Edit these files:
-- `src/layouts/Base.astro` — your name in the nav logo and footer
-- `src/pages/index.astro` — your bio, stats, and featured work
+- `src/layouts/Base.astro` — nav/logo/footer and homepage scrollspy behavior
+- `src/pages/index.astro` — all homepage sections (Home, Projects, Publications, CV, Beyond Academics, Contact)
 - `src/pages/cv.astro` — your education, experience, skills, awards
 - `src/pages/Beyond_Academics.astro` — beyond academics overview
 - `src/pages/Beyond_Academics/trips.astro` — trips and tour photos
 - `src/pages/contact.astro` — your email and social links
+
+### 1.1 Homepage section IDs (used by nav + scrollspy)
+Keep these section IDs in `src/pages/index.astro`:
+- `home`
+- `projects`
+- `publications`
+- `cv`
+- `beyond-academics`
+- `contact`
 
 ### 2. Adding a publication
 Create a new file in `src/content/publications/`:

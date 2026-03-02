@@ -1,15 +1,20 @@
 ---
 import '../styles/global.css';
 
-const { title = 'Md Shihab Sarker — Portfolio', description = 'Academic & developer portfolio', currentPage = '' } = Astro.props;
+const {
+  title = 'Md Shihab Sarker — Portfolio',
+  description = 'Academic & developer portfolio',
+  currentPage = '',
+  enableScrollSpy = false,
+} = Astro.props;
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/publications', label: 'Publications' },
-  { href: '/cv', label: 'CV' },
-  { href: '/Beyond_Academics', label: 'Beyond_Academics' },
-  { href: '/contact', label: 'Contact' },
+  { section: 'home', label: 'Home', page: '/' },
+  { section: 'projects', label: 'Projects', page: '/projects' },
+  { section: 'publications', label: 'Publications', page: '/publications' },
+  { section: 'cv', label: 'CV', page: '/cv' },
+  { section: 'beyond-academics', label: 'Beyond Academics', page: '/Beyond_Academics' },
+  { section: 'contact', label: 'Contact', page: '/contact' },
 ];
 ---
 
@@ -22,26 +27,32 @@ const navLinks = [
   <title>{title}</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 </head>
-<body>
-  <nav>
+<body data-enable-scrollspy={enableScrollSpy ? 'true' : 'false'}>
+  <nav data-scrollspy-nav={enableScrollSpy ? 'true' : undefined}>
     <div class="nav-inner">
-      <a href="/" class="nav-logo">Md Shihab Sarker</a>
+      <a href={enableScrollSpy ? '/#home' : '/'} class="nav-logo">Md Shihab Sarker</a>
       <ul class="nav-links">
         {navLinks.map(link => (
           <li>
+            {(() => {
+              const href = enableScrollSpy ? `/#${link.section}` : link.page;
+              const isRouteActive =
+                currentPage === link.page ||
+                (link.page !== '/' && currentPage.startsWith(`${link.page}/`));
+              return (
             <a
-              href={link.href}
-              class={
-                currentPage === link.href ||
-                (link.href !== '/' && currentPage.startsWith(`${link.href}/`))
-                  ? 'active'
-                  : ''
-              }
+              href={href}
+              data-scrollspy-link={link.section}
+              class={!enableScrollSpy && isRouteActive ? 'active' : ''}
+              aria-current={!enableScrollSpy && isRouteActive ? 'page' : undefined}
             >
               {link.label}
             </a>
+              );
+            })()}
           </li>
         ))}
+        <span class="nav-indicator" aria-hidden="true"></span>
       </ul>
     </div>
   </nav>
@@ -53,5 +64,86 @@ const navLinks = [
   <footer>
     <p>© {new Date().getFullYear()} Md Shihab Sarker · Built with Astro · Hosted on GitHub Pages</p>
   </footer>
+
+  <script>
+    const enableScrollSpy = document.body.dataset.enableScrollspy === 'true';
+    const navList = document.querySelector('.nav-links');
+    const navIndicator = document.querySelector('.nav-indicator');
+    const navAnchors = [...document.querySelectorAll('.nav-links a[data-scrollspy-link]')];
+
+    const updateIndicator = (link) => {
+      if (!navList || !navIndicator || !link) return;
+
+      const listRect = navList.getBoundingClientRect();
+      const linkRect = link.getBoundingClientRect();
+      const left = linkRect.left - listRect.left + navList.scrollLeft;
+
+      navIndicator.style.width = `${linkRect.width}px`;
+      navIndicator.style.transform = `translateX(${left}px)`;
+      navIndicator.style.opacity = '1';
+    };
+
+    if (navAnchors.length > 0) {
+      const getActiveLink = () =>
+        navAnchors.find((link) => link.classList.contains('is-active')) ||
+        navAnchors.find((link) => link.classList.contains('active')) ||
+        navAnchors[0];
+
+      const setActive = (id) => {
+        navAnchors.forEach((link) => {
+          const isActive = link.getAttribute('data-scrollspy-link') === id;
+          link.classList.toggle('is-active', isActive);
+          if (isActive) link.setAttribute('aria-current', 'page');
+          else link.removeAttribute('aria-current');
+        });
+
+        updateIndicator(getActiveLink());
+      };
+
+      updateIndicator(getActiveLink());
+
+      if (enableScrollSpy) {
+        const sections = navAnchors
+          .map((link) => link.getAttribute('data-scrollspy-link'))
+          .filter(Boolean)
+          .map((id) => document.getElementById(id))
+          .filter(Boolean);
+
+        setActive('home');
+
+        navAnchors.forEach((link) => {
+          link.addEventListener('click', () => {
+            const targetId = link.getAttribute('data-scrollspy-link');
+            if (targetId) setActive(targetId);
+            requestAnimationFrame(() => updateIndicator(link));
+          });
+        });
+
+        if (sections.length > 0) {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              const visible = entries
+                .filter((entry) => entry.isIntersecting)
+                .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+              if (visible[0]?.target?.id) setActive(visible[0].target.id);
+            },
+            { rootMargin: '-35% 0px -55% 0px', threshold: 0 }
+          );
+
+          sections.forEach((section) => observer.observe(section));
+        }
+      }
+
+      if (navList) {
+        navList.addEventListener('scroll', () => {
+          updateIndicator(getActiveLink());
+        }, { passive: true });
+      }
+
+      window.addEventListener('resize', () => {
+        updateIndicator(getActiveLink());
+      });
+    }
+  </script>
 </body>
 </html>
