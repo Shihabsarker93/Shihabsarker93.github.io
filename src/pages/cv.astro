@@ -1,0 +1,203 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="CV — Md Shihab Sarker" currentPage="/cv">
+
+  <div class="page-header animate">
+    <span class="page-label">Curriculum Vitae</span>
+    <h1>CV</h1>
+    <p>Academic and professional background. Download the full PDF below.</p>
+    <div class="header-actions">
+      <a href="/docs/Md_Shihab_Sarker_Resume.pdf" class="btn btn-primary" download>
+        Download PDF ↓
+      </a>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <section class="cv-section animate delay-1">
+    <h2 class="cv-section-title">Education</h2>
+
+    <div class="cv-list">
+      <div class="cv-entry">
+        <div class="cv-meta">
+          <span class="cv-years">2022 — Present</span>
+          <span class="cv-place">BRAC University, Dhaka</span>
+        </div>
+        <div class="cv-body">
+          <h3>Bachelor of Science in Computer Science</h3>
+          <p>CGPA: 3.61/4.0</p>
+          <p>Relevant Coursework: Machine Learning, Data Structures, Algorithms, Database Systems, Web Development</p>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-meta">
+          <span class="cv-years">2020</span>
+          <span class="cv-place">Rangpur Government College, Rangpur</span>
+        </div>
+        <div class="cv-body">
+          <h3>Higher Secondary Certificate (HSC)</h3>
+          <p>GPA: 5.0/5.0</p>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-meta">
+          <span class="cv-years">2018</span>
+          <span class="cv-place">Nilphamari Government High School, Nilphamari</span>
+        </div>
+        <div class="cv-body">
+          <h3>Secondary School Certificate (SSC)</h3>
+          <p>GPA: 5.0/5.0</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Experience -->
+  <section class="cv-section animate delay-2">
+    <h2 class="cv-section-title">Experience</h2>
+
+    <div class="cv-list"></div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Skills -->
+  <section class="cv-section animate delay-3">
+    <h2 class="cv-section-title">Skills</h2>
+
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">C++</span>
+          <span class="tag">Rust</span>
+          <span class="tag">TypeScript</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>ML / Research</h4>
+        <div class="tags">
+          <span class="tag">PyTorch</span>
+          <span class="tag">JAX</span>
+          <span class="tag">CUDA</span>
+          <span class="tag">HuggingFace</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Infrastructure</h4>
+        <div class="tags">
+          <span class="tag">Kubernetes</span>
+          <span class="tag">AWS</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Linux</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Awards -->
+  <section class="cv-section animate delay-4">
+    <h2 class="cv-section-title">Awards & Fellowships</h2>
+
+    <div class="cv-list"></div>
+  </section>
+
+  <div class="cv-footer animate">
+    <a href="/docs/Md_Shihab_Sarker_Resume.pdf" class="btn btn-primary" download>Download Full CV (PDF) ↓</a>
+  </div>
+
+</Base>
+
+<style>
+.header-actions { margin-top: 1.5rem; }
+
+.cv-section { margin-bottom: 0; }
+
+.cv-section-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-subtle);
+  margin-bottom: 1.5rem;
+}
+
+.cv-list { display: flex; flex-direction: column; }
+
+.cv-entry {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cv-entry:first-child { border-top: 1px solid var(--border); }
+
+.cv-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-top: 0.1rem;
+}
+
+.cv-years {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-subtle);
+}
+
+.cv-place {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent);
+}
+
+.cv-body h3 {
+  font-size: 0.98rem;
+  margin-bottom: 0.35rem;
+  color: var(--text);
+}
+
+.cv-body p {
+  font-size: 0.88rem;
+  margin-bottom: 0.25rem;
+  color: var(--text-muted);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.skill-group h4 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.cv-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+  .cv-entry { grid-template-columns: 1fr; gap: 0.5rem; }
+  .cv-meta { flex-direction: row; gap: 0.75rem; }
+}
+</style>

@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Beyond_Academics — Md Shihab Sarker" currentPage="/Beyond_Academics">
+
+  <div class="page-header animate">
+    <span class="page-label">Beyond Academics</span>
+    <h1>Beyond_Academics</h1>
+    <p>A space for my passions, travel stories, and moments outside research and engineering.</p>
+  </div>
+
+  <section class="section animate delay-1">
+    <h2 class="section-title">Passions</h2>
+    <div class="card-list">
+      <article class="card life-card">
+        <h3>Personal Interests</h3>
+        <p>Share what you enjoy most outside work: hobbies, sports, books, or creative projects.</p>
+      </article>
+      <article class="card life-card">
+        <h3>Community & Activities</h3>
+        <p>Add clubs, volunteering, mentoring, or social activities that matter to you.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section animate delay-2">
+    <h2 class="section-title">Tours & Travel</h2>
+    <div class="card-list">
+      <article class="card life-card">
+        <h3>Recent Trips</h3>
+        <p>My travel photos and stories are now on a separate page.</p>
+        <a href="/Beyond_Academics/trips" class="btn btn-outline">Open Trips Page</a>
+      </article>
+      <article class="card life-card">
+        <h3>Photo Journal</h3>
+        <p>Store photos in <code>public/tour/images1/</code>, <code>public/beyond/</code>, and <code>public/miscellaneous/</code>.</p>
+      </article>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+.section { margin-bottom: 2.5rem; }
+
+.section-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-subtle);
+  margin-bottom: 1rem;
+}
+
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.life-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.life-card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.life-card p {
+  margin: 0;
+  font-size: 0.88rem;
+}
+
+</style>

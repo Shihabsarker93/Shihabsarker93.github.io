@@ -1,0 +1,189 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Md Shihab Sarker — Researcher & Developer" currentPage="/">
+
+  <!-- Hero -->
+  <section class="hero animate">
+    <span class="page-label">Welcome</span>
+    <h1>Md Shihab Sarker</h1>
+    <p class="hero-role">BSc CSE Student · Data Science · Machine Learning</p>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Bio -->
+  <section class="bio animate delay-1">
+    <p class="lead">
+      I am Md Shihab Sarker, currently pursuing a BSc in Computer Science and Engineering at BRAC University (2022–Present). My academic interests center around data science, machine learning, and deep learning research.
+    </p>
+    <p>
+      I am passionate about working with data — analyzing patterns, building predictive models, and designing deep learning systems that can solve complex problems. I am particularly interested in model efficiency, scalable inference, and applied AI research.
+    </p>
+    <p>
+      Through coursework, independent study, and projects, I am building a strong foundation in mathematics, algorithms, and statistical learning, with the goal of contributing to impactful research in artificial intelligence.
+    </p>
+
+    <div class="cta-row">
+      <a href="/cv" class="btn btn-primary">View CV</a>
+      <a href="/projects" class="btn btn-outline">Projects</a>
+      <a href="/contact" class="btn btn-outline">Get in touch</a>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Quick links -->
+  <section class="quick-stats animate delay-2">
+    <div class="stat-grid">
+      <div class="stat">
+        <span class="stat-num">_</span>
+        <span class="stat-label">Repositories</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">_</span>
+        <span class="stat-label">Projects</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">_</span>
+        <span class="stat-label">Started BSc CSE</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent work preview -->
+  <section class="recent animate delay-3">
+    <h2>Recent Work</h2>
+    <p>A selection of recent projects.</p>
+
+    <div class="preview-list">
+      <a href="https://github.com/Shihabsarker93/mern-project01" class="preview-item" target="_blank" rel="noopener">
+        <div>
+          <span class="mono">2025 · Full Stack</span>
+          <h3>MERN Full-Stack House Rental Website</h3>
+          <p>MongoDB, Express.js, React, and Node.js platform for buying, selling, and listing properties.</p>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="https://github.com/Shihabsarker93/hotel-booking" class="preview-item" target="_blank" rel="noopener">
+        <div>
+          <span class="mono">2024 · Web App</span>
+          <h3>PHP-Based Hotel Booking System</h3>
+          <p>PHP and MySQL booking system with reservation flow and secure user management.</p>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+.hero { margin-bottom: 0; }
+
+.hero-role {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-subtle);
+  letter-spacing: 0.04em;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.lead {
+  font-size: 1.1rem;
+  color: var(--text);
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.lead strong {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.stat-grid {
+  display: flex;
+  gap: 3rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-num {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  line-height: 1;
+  color: var(--text);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-subtle);
+  margin-top: 0.25rem;
+}
+
+.recent h2 { margin-bottom: 0.5rem; }
+
+.preview-list {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.preview-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: padding-left 0.2s;
+  gap: 1rem;
+}
+
+.preview-item:first-child { border-top: 1px solid var(--border); }
+
+.preview-item:hover { padding-left: 0.5rem; }
+
+.preview-item h3 {
+  font-size: 1rem;
+  margin: 0.2rem 0 0.3rem;
+  color: var(--text);
+}
+
+.preview-item p {
+  font-size: 0.88rem;
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.preview-item .mono { display: block; }
+
+.arrow {
+  font-size: 1.2rem;
+  color: var(--text-subtle);
+  flex-shrink: 0;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.preview-item:hover .arrow {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+</style>
