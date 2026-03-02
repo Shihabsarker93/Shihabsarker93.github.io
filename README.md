@@ -299,6 +299,7 @@ Before making changes:
 
 * Read this README
 * Strictly follow **Core Architecture Rules (Do Not Break)**
+* Read before prompting Agent README.md and strictly follow “Core Architecture Rules (Do Not Break)”.
 
 Do NOT:
 
@@ -372,6 +373,8 @@ This site intentionally supports:
 * Shared content via reusable components
 * Scroll-driven navigation
 * Static GitHub deployment
+
+
 
 All section edits must happen in `src/components/sections/*` to stay consistent.
 
