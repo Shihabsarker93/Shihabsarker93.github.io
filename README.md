@@ -4,6 +4,8 @@ A clean, minimal academic/developer portfolio built with **Astro**, hosted on **
 
 ## 🚀 Quick Start
 
+## https://shihabsarker93.github.io/
+
 ```bash
 npm install
 npm run dev        # http://localhost:4321
