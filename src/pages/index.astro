@@ -10,30 +10,31 @@ import ContactSection from '../components/sections/ContactSection.astro';
 <Base title="Md Shihab Sarker — Researcher & Developer" currentPage="/" enableScrollSpy={true}>
   <section id="home" class="scroll-section">
     <section class="hero animate">
-      <span class="page-label">Welcome</span>
-      <h1>Md Shihab Sarker</h1>
-      <p class="hero-role">BSc CSE Student · Data Science · Machine Learning</p>
+      <div class="hero-layout">
+        <div class="hero-header">
+          <div class="hero-copy">
+            <span class="page-label">Welcome</span>
+            <h1>Md Shihab Sarker</h1>
+            <p class="hero-role">BSc CSE Student · Data Science · Machine Learning</p>
+          </div>
+          <img src="/images/profile.jpeg" alt="Md Shihab Sarker portrait" class="hero-image" loading="lazy" />
+        </div>
+
+        <div class="hero-body">
+          <p class="lead">
+            I am a Computer Science student at BRAC University with a dual focus on Full-Stack Development and AI Research. I am an expert in the MERN architecture, building scalable software solutions from the ground up. My academic heart lies in Data Science and Deep Learning, where I research model efficiency and predictive patterns. I thrive at the intersection of robust software engineering and high-impact Artificial Intelligence.
+          </p>
+
+          <div class="cta-row">
+            <a href="#cv" class="btn btn-primary hero-cta-btn">View CV</a>
+            <a href="#projects" class="btn btn-outline hero-cta-btn">Projects</a>
+            <a href="#contact" class="btn btn-outline hero-cta-btn">Get in touch</a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <hr class="divider" />
-
-    <section class="bio animate delay-1">
-      <p class="lead">
-        I am Md Shihab Sarker, currently pursuing a BSc in Computer Science and Engineering at BRAC University (2022–Present). My academic interests center around data science, machine learning, and deep learning research.
-      </p>
-      <p>
-        I am passionate about working with data — analyzing patterns, building predictive models, and designing deep learning systems that can solve complex problems. I am particularly interested in model efficiency, scalable inference, and applied AI research.
-      </p>
-      <p>
-        Through coursework, independent study, and projects, I am building a strong foundation in mathematics, algorithms, and statistical learning, with the goal of contributing to impactful research in artificial intelligence.
-      </p>
-
-      <div class="cta-row">
-        <a href="#cv" class="btn btn-primary">View CV</a>
-        <a href="#projects" class="btn btn-outline">Projects</a>
-        <a href="#contact" class="btn btn-outline">Get in touch</a>
-      </div>
-    </section>
 
     <section class="quick-stats animate delay-2">
       <div class="stat-grid">
@@ -115,6 +116,24 @@ import ContactSection from '../components/sections/ContactSection.astro';
   margin-bottom: 0;
 }
 
+.hero-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.hero-header {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.hero-copy {
+  align-self: flex-start;
+  padding-top: clamp(0.25rem, 1vh, 0.75rem);
+}
+
 .hero-role {
   font-family: var(--font-mono);
   font-size: 0.82rem;
@@ -124,11 +143,26 @@ import ContactSection from '../components/sections/ContactSection.astro';
   margin-bottom: 0;
 }
 
+.hero-image {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 12px;
+  object-fit: cover;
+  justify-self: end;
+  margin-top: 1.5rem;
+}
+
+.hero-body {
+  width: 100%;
+  margin-top: 3.5rem;
+}
+
 .lead {
   font-size: 1.1rem;
   color: var(--text);
   font-weight: 300;
   line-height: 1.75;
+  margin-top: 0;
 }
 
 .cta-row {
@@ -136,6 +170,15 @@ import ContactSection from '../components/sections/ContactSection.astro';
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: 2rem;
+}
+
+.hero-cta-btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-cta-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .stat-grid {
@@ -221,6 +264,17 @@ import ContactSection from '../components/sections/ContactSection.astro';
 .preview-item:hover .arrow {
   color: var(--accent);
   transform: translateX(4px);
+}
+
+@media (max-width: 900px) {
+  .hero-header {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-image {
+    justify-self: start;
+    margin-top: 1.5rem;
+  }
 }
 
 @media (max-width: 720px) {
