@@ -81,36 +81,45 @@ nav {
   justify-content: space-between;
 }
 
-.nav-logo {
-  font-family: var(--font-serif);
-  font-size: 1.2rem;
-  color: var(--text);
-  text-decoration: none;
-  letter-spacing: -0.02em;
-  position: relative;
-  /* logo shares flex centering and full nav height */
+.nav-logo,
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   display: flex;
   align-items: center;
   height: var(--nav-h);
   line-height: 1;
   margin: 0;
-  /* remove vertical padding; avoid offset */
-  padding: 0 0.1rem;
+  padding: 0 0.55rem;
+  text-decoration: none;
+  position: relative;
   transition:
     transform 180ms ease,
     box-shadow 180ms ease,
     color 180ms ease,
-    opacity 180ms ease;
+    opacity 180ms ease,
+    background-color 180ms ease;
+  white-space: nowrap;
+}
+
+.nav-logo {
+  flex-shrink: 0;
 }
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 2rem;
   list-style: none;
   overflow-x: visible;
   scrollbar-width: none;
   position: relative;
-  padding-bottom: 0.35rem;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links::-webkit-scrollbar { display: none; }
@@ -120,30 +129,8 @@ nav {
 }
 
 .nav-links a {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 400;
-  color: var(--text-muted);
-  text-decoration: none;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    color 180ms ease,
-    opacity 180ms ease,
-    background-color 180ms ease;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  height: var(--nav-h);
-  line-height: 1;
-  margin: 0;
-  /* horizontal padding only; vertical centering by height */
-  padding: 0 0.55rem;
   border-radius: 6px;
-  position: relative;
   z-index: 2;
   touch-action: manipulation;
 }
@@ -701,7 +688,6 @@ footer p {
   nav { padding: 0 1.25rem; }
   .nav-inner { gap: 1rem; }
   .nav-links { gap: 1rem; overflow-x: auto; }
-  .nav-logo { font-size: 1rem; white-space: nowrap; }
   .grid-2 { grid-template-columns: 1fr; }
   .card-grid { grid-template-columns: 1fr; }
   .tile-grid { grid-template-columns: 1fr; }
@@ -712,6 +698,7 @@ footer p {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .nav-logo,
   .nav-links a {
     transition: none !important;
     transform: none !important;
