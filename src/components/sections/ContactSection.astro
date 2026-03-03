@@ -24,47 +24,110 @@
     <button type="submit" class="contact-send-btn">Send Message</button>
     <p id="contact-form-status" class="contact-form-status" aria-live="polite"></p>
     <p class="contact-form-note">
-      This opens your default email app to send the message to
-      <a href="mailto:shihabsarker650@gmail.com">shihabsarker650@gmail.com</a>.
+      <a id="contact-mailto-fallback" href="mailto:shihabsarker650@gmail.com">If it doesn’t open, click here.</a>
+    </p>
+    <p class="contact-form-note">
+      <button
+        id="contact-copy-email"
+        type="button"
+        class="contact-copy-text-btn"
+        data-copy-value="shihabsarker650@gmail.com"
+        data-default-label="Copy email address"
+        aria-label="Copy email address"
+        title="Copy email address"
+      >
+        Copy email address
+      </button>
+    </p>
+    <p class="contact-form-note">
+      Opens Gmail compose in a new tab. If blocked, it falls back to your default mail app.
     </p>
   </form>
 
   <div class="contact-side contact-card animate delay-2">
     <div class="contact-block">
       <span class="contact-label">Email</span>
-      <a href="mailto:shihabsarker650@gmail.com" class="contact-value">shihabsarker650@gmail.com</a>
+      <div class="contact-link-row">
+        <a href="mailto:shihabsarker650@gmail.com" class="contact-value">shihabsarker650@gmail.com</a>
+        <button
+          type="button"
+          class="contact-copy-btn"
+          data-copy-value="shihabsarker650@gmail.com"
+          data-default-label="Copy"
+          aria-label="Copy email address"
+          title="Copy email address"
+        >
+          Copy
+        </button>
+      </div>
       <p class="contact-note">Best for collaboration and general contact.</p>
     </div>
 
     <div class="contact-block">
       <span class="contact-label">Profiles</span>
       <div class="profile-list">
-        <a href="https://github.com/Shihabsarker93" class="profile-item" target="_blank" rel="noopener">
-          <span class="profile-icon">⌨</span>
-          <div>
-            <span class="profile-name">GitHub</span>
-            <span class="profile-handle">github.com/Shihabsarker93</span>
-          </div>
-          <span class="profile-arrow">→</span>
-        </a>
+        <div class="profile-row">
+          <a href="https://github.com/Shihabsarker93" class="profile-item" target="_blank" rel="noopener">
+            <span class="profile-icon">⌨</span>
+            <div>
+              <span class="profile-name">GitHub</span>
+              <span class="profile-handle">github.com/Shihabsarker93</span>
+            </div>
+            <span class="profile-arrow">→</span>
+          </a>
+          <button
+            type="button"
+            class="contact-copy-btn"
+            data-copy-value="https://github.com/Shihabsarker93"
+            data-default-label="Copy"
+            aria-label="Copy GitHub URL"
+            title="Copy GitHub URL"
+          >
+            Copy
+          </button>
+        </div>
 
-        <a href="tel:+8801793473098" class="profile-item">
-          <span class="profile-icon">☎</span>
-          <div>
-            <span class="profile-name">Phone</span>
-            <span class="profile-handle">+8801793473098</span>
-          </div>
-          <span class="profile-arrow">→</span>
-        </a>
+        <div class="profile-row">
+          <a href="tel:+8801793473098" class="profile-item">
+            <span class="profile-icon">☎</span>
+            <div>
+              <span class="profile-name">Phone</span>
+              <span class="profile-handle">+8801793473098</span>
+            </div>
+            <span class="profile-arrow">→</span>
+          </a>
+          <button
+            type="button"
+            class="contact-copy-btn"
+            data-copy-value="+8801793473098"
+            data-default-label="Copy"
+            aria-label="Copy phone number"
+            title="Copy phone number"
+          >
+            Copy
+          </button>
+        </div>
 
-        <a href="https://www.linkedin.com/in/md-shihab-sarker-26065a249/" class="profile-item" target="_blank" rel="noopener">
-          <span class="profile-icon">◈</span>
-          <div>
-            <span class="profile-name">LinkedIn</span>
-            <span class="profile-handle">linkedin.com/in/md-shihab-sarker-26065a249</span>
-          </div>
-          <span class="profile-arrow">→</span>
-        </a>
+        <div class="profile-row">
+          <a href="https://www.linkedin.com/in/md-shihab-sarker-26065a249/" class="profile-item" target="_blank" rel="noopener">
+            <span class="profile-icon">◈</span>
+            <div>
+              <span class="profile-name">LinkedIn</span>
+              <span class="profile-handle">linkedin.com/in/md-shihab-sarker-26065a249</span>
+            </div>
+            <span class="profile-arrow">→</span>
+          </a>
+          <button
+            type="button"
+            class="contact-copy-btn"
+            data-copy-value="https://www.linkedin.com/in/md-shihab-sarker-26065a249/"
+            data-default-label="Copy"
+            aria-label="Copy LinkedIn URL"
+            title="Copy LinkedIn URL"
+          >
+            Copy
+          </button>
+        </div>
       </div>
     </div>
 
@@ -78,28 +141,122 @@
 <script>
   const contactForm = document.getElementById('contact-mail-form');
   const formStatus = document.getElementById('contact-form-status');
+  const fallbackLink = document.getElementById('contact-mailto-fallback');
+  const copyButtons = document.querySelectorAll('[data-copy-value]');
+  const targetEmail = 'shihabsarker650@gmail.com';
+  const copyLabelTimers = new WeakMap();
+
+  const buildMailtoUrl = (emailValue, subjectValue, messageValue) => {
+    const mailSubject = `[Portfolio Contact] ${subjectValue}`;
+    const mailBody = `From: ${emailValue}\n\n${messageValue}`;
+    return `mailto:${targetEmail}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+  };
+
+  const buildGmailComposeUrl = (emailValue, subjectValue, messageValue) => {
+    const mailSubject = `[Portfolio Contact] ${subjectValue}`;
+    const mailBody = `From: ${emailValue}\n\n${messageValue}`;
+    return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+  };
+
+  const getFormValues = () => {
+    if (!contactForm) return { email: '', subject: '', message: '' };
+    const formData = new FormData(contactForm);
+    return {
+      email: `${formData.get('email') || ''}`.trim(),
+      subject: `${formData.get('subject') || ''}`.trim(),
+      message: `${formData.get('message') || ''}`.trim()
+    };
+  };
+
+  const updateFallbackHref = () => {
+    if (!fallbackLink) return;
+    const { email, subject, message } = getFormValues();
+    fallbackLink.href =
+      email && subject && message
+        ? buildMailtoUrl(email, subject, message)
+        : `mailto:${targetEmail}`;
+  };
+
+  const submitContactMail = () => {
+    const { email, subject, message } = getFormValues();
+    if (!email || !subject || !message) {
+      if (formStatus) formStatus.textContent = 'Please fill all fields before sending.';
+      updateFallbackHref();
+      return;
+    }
+
+    const gmailUrl = buildGmailComposeUrl(email, subject, message);
+    const mailtoUrl = buildMailtoUrl(email, subject, message);
+    if (fallbackLink) fallbackLink.href = mailtoUrl;
+    const gmailWindow = window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+    if (!gmailWindow) {
+      window.location.href = mailtoUrl;
+    }
+  };
+
+  const fallbackCopyToClipboard = (value) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = value;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    textarea.style.left = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    let copied = false;
+    try {
+      copied = document.execCommand('copy');
+    } catch {
+      copied = false;
+    }
+    document.body.removeChild(textarea);
+    return copied;
+  };
+
+  const copyToClipboard = async (value) => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText(value);
+        return true;
+      } catch {
+        return fallbackCopyToClipboard(value);
+      }
+    }
+    return fallbackCopyToClipboard(value);
+  };
+
+  const setButtonCopiedState = (button) => {
+    const defaultLabel = button.dataset.defaultLabel || 'Copy';
+    button.textContent = 'Copied';
+    const previousTimer = copyLabelTimers.get(button);
+    if (previousTimer) window.clearTimeout(previousTimer);
+    const timer = window.setTimeout(() => {
+      button.textContent = defaultLabel;
+    }, 1200);
+    copyLabelTimers.set(button, timer);
+  };
 
   if (contactForm) {
+    contactForm.addEventListener('input', () => {
+      if (formStatus) formStatus.textContent = '';
+      updateFallbackHref();
+    });
+
     contactForm.addEventListener('submit', (event) => {
       event.preventDefault();
-
-      const formData = new FormData(contactForm);
-      const email = `${formData.get('email') || ''}`.trim();
-      const subject = `${formData.get('subject') || ''}`.trim();
-      const message = `${formData.get('message') || ''}`.trim();
-
-      if (!email || !subject || !message) {
-        if (formStatus) formStatus.textContent = 'Please fill all fields before sending.';
-        return;
-      }
-
-      const mailSubject = `[Portfolio Contact] ${subject}`;
-      const mailBody = `From: ${email}\n\n${message}`;
-      const mailtoUrl =
-        `mailto:shihabsarker650@gmail.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
-
-      if (formStatus) formStatus.textContent = 'Opening your email app...';
-      window.location.href = mailtoUrl;
+      submitContactMail();
     });
   }
+
+  copyButtons.forEach((button) => {
+    button.addEventListener('click', async () => {
+      const value = button.dataset.copyValue || '';
+      if (!value) return;
+      const copied = await copyToClipboard(value);
+      if (copied) setButtonCopiedState(button);
+    });
+  });
+
+  updateFallbackHref();
 </script>

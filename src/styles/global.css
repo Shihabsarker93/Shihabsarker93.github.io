@@ -465,6 +465,21 @@ a:hover { text-decoration: underline; }
   text-decoration: underline;
 }
 
+.contact-copy-text-btn {
+  font: inherit;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-decoration: underline;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.contact-copy-text-btn:hover {
+  color: var(--text);
+}
+
 .contact-label {
   display: block;
   font-family: var(--font-mono);
@@ -489,6 +504,17 @@ a:hover { text-decoration: underline; }
   color: var(--accent);
 }
 
+.contact-link-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.contact-link-row .contact-value {
+  margin-bottom: 0;
+}
+
 .contact-note {
   font-size: 0.85rem;
   color: var(--text-subtle);
@@ -507,14 +533,26 @@ a:hover { text-decoration: underline; }
   flex-direction: column;
 }
 
+.profile-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-row:first-child {
+  border-top: 1px solid var(--border);
+}
+
 .profile-item {
   display: flex;
   align-items: center;
   gap: 0.9rem;
   padding: 0.8rem 0;
-  border-bottom: 1px solid var(--border);
   text-decoration: none;
   color: inherit;
+  flex: 1;
+  min-width: 0;
   transition:
     transform 160ms ease,
     box-shadow 160ms ease,
@@ -523,7 +561,7 @@ a:hover { text-decoration: underline; }
 }
 
 .profile-item:first-child {
-  border-top: 1px solid var(--border);
+  border-top: 0;
 }
 
 .profile-item:hover {
@@ -566,6 +604,41 @@ a:hover { text-decoration: underline; }
 .profile-item:hover .profile-arrow {
   color: var(--accent);
   transform: none;
+}
+
+.contact-copy-btn {
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 0.34rem 0.56rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+  cursor: pointer;
+  flex: 0 0 auto;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+.contact-copy-btn:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+  border-color: var(--border-strong);
+}
+
+.contact-copy-btn:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.contact-copy-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* ── TAGS ── */
@@ -695,6 +768,7 @@ footer p {
   .contact-card { padding: 0.9rem; }
   .field label { font-size: 0.72rem; }
   .field input, .field textarea { font-size: 0.88rem; }
+  .contact-copy-btn { padding: 0.32rem 0.5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
