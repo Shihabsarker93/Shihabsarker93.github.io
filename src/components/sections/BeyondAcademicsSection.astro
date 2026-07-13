@@ -25,18 +25,11 @@
       </div>
     </a>
 
-    <a href="/beyond-academics/trips" class="tile card">
-      <div class="tile-content">
-        <h3>Recent Trips</h3>
-        <p>Travel stories and photographs from journeys that shaped my perspective.</p>
-        <span class="tile-meta">Open Trips Page</span>
-      </div>
-    </a>
-
-    <a href="/beyond-academics/photos" class="tile card">
+    <a href="/beyond-academics/trips" class="tile card journal-tile">
       <div class="tile-content">
         <h3>Photo Journal</h3>
-        <p>A personal archive of meaningful moments.</p>
+        <p>Travel stories and photographs from journeys that shaped my perspective.</p>
+        <span class="tile-meta">Open Photo Journal</span>
       </div>
     </a>
   </div>
@@ -58,10 +51,18 @@
   gap: 1rem;
 }
 
+.journal-tile {
+  grid-column: 1 / -1;
+}
+
 @media (max-width: 599px) {
   .tile-headings {
     grid-template-columns: 1fr;
     gap: 0.5rem;
+  }
+
+  .journal-tile {
+    grid-column: auto;
   }
 }
 </style>
