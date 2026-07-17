@@ -1,18 +1,3 @@
-Perfect. Below is your **fully edited, production-ready README** with:
-
-* Clear architecture explanation
-* Golden workflow
-* Navigation clarification
-* Route casing warning
-* Codex guardrail template
-* Clean structure
-* No redundancy
-* No architectural changes
-
-You can replace your entire README with this.
-
----
-
 # My Portfolio
 
 A clean, minimal academic/developer portfolio built with **Astro**, hosted on **GitHub Pages**, with content managed as **Markdown files**.
@@ -377,6 +362,3 @@ This site intentionally supports:
 
 
 All section edits must happen in `src/components/sections/*` to stay consistent.
-
-
-
