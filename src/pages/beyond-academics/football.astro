@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="Football — Md Shihab Sarker" currentPage="/Beyond_Academics/football">
+  <div class="page-header animate">
+    <span class="page-label">Sport & Events</span>
+    <h1>Football</h1>
+    <p>A growing collection of match days, tournaments, and moments from the pitch.</p>
+  </div>
+
+  <section class="section animate delay-1">
+    <div class="gallery-empty card">
+      <span class="gallery-icon" aria-hidden="true">＋</span>
+      <h2>Event photos coming soon</h2>
+      <p>Football photographs and event memories will be added here.</p>
+    </div>
+  </section>
+
+  <div class="actions animate delay-2">
+    <a href="/#beyond-academics" class="btn btn-outline">Back to Beyond Academics</a>
+  </div>
+</Base>
+
+<style>
+.section { margin-bottom: 2rem; }
+
+.gallery-empty {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-style: dashed;
+}
+
+.gallery-icon {
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 1.5rem;
+}
+
+.gallery-empty h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.35rem;
+}
+
+.gallery-empty p { margin: 0; }
+.actions { margin-top: 0.5rem; }
+</style>

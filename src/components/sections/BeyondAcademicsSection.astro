@@ -1,35 +1,26 @@
 <div class="page-header animate">
   <span class="page-label">Beyond Academics</span>
   <h1>Beyond Academics</h1>
-  <p>A space for my passions, travel stories, and moments outside research and engineering.</p>
+  <p>A collection of travel memories and football moments beyond academics.</p>
 </div>
 
 <section class="section-container animate delay-1">
-  <div class="tile-headings">
-    <h2 class="section-title">Passions</h2>
-    <h2 class="section-title">Tours & Travel</h2>
-  </div>
-
   <div class="tile-grid">
-    <a href="/beyond-academics/interests" class="tile card">
+    <a href="/beyond-academics/trips" class="tile card">
       <div class="tile-content">
-        <h3>Personal Interests</h3>
-        <p>The passions and creative pursuits that define me beyond academia.</p>
+        <span class="section-title">Tours & Travel</span>
+        <h3>Travel</h3>
+        <p>Photographs and stories from journeys that shaped my perspective.</p>
+        <span class="tile-meta">Explore Travel</span>
       </div>
     </a>
 
-    <a href="/beyond-academics/community" class="tile card">
+    <a href="/beyond-academics/football" class="tile card">
       <div class="tile-content">
-        <h3>Community & Activities</h3>
-        <p>The communities I contribute to and the initiatives I care about.</p>
-      </div>
-    </a>
-
-    <a href="/beyond-academics/trips" class="tile card journal-tile">
-      <div class="tile-content">
-        <h3>Photo Journal</h3>
-        <p>Travel stories and photographs from journeys that shaped my perspective.</p>
-        <span class="tile-meta">Open Photo Journal</span>
+        <span class="section-title">Sport & Events</span>
+        <h3>Football</h3>
+        <p>Match days, tournaments, and memorable moments from the pitch.</p>
+        <span class="tile-meta">Explore Football</span>
       </div>
     </a>
   </div>
@@ -45,24 +36,7 @@
   margin-bottom: 1rem;
 }
 
-.tile-headings {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.journal-tile {
-  grid-column: 1 / -1;
-}
-
 @media (max-width: 599px) {
-  .tile-headings {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-
-  .journal-tile {
-    grid-column: auto;
-  }
+  .section-title { margin-bottom: 0.25rem; }
 }
 </style>
